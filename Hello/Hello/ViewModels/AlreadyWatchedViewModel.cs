@@ -16,13 +16,16 @@ namespace Hello.ViewModels
         }
 
         async void ImdbApiTest() {
-            //var movie = await new ImdbApi().getMovieByIdAsync();
-            //Items.Add(movie);
+            LocalStorage localStorage = new LocalStorage();
 
-            var list = await new ImdbApi().searchMoviesByNameAsync("matrix");
-            foreach (var l in list) {
-                Items.Add(l);
+            var local_list = await localStorage.GetItemsAsync();
+
+            foreach (var ll in local_list)
+            {
+                System.Diagnostics.Debug.Write("onSecond | " + ll.Title);
+                Items.Add(ll);
             }
+            
         }
         
         #region INotifyPropertyChanged
