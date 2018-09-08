@@ -6,11 +6,12 @@ using System.Text;
 
 namespace Hello.ViewModels
 {
-    public class DetailMovieViewModel : BaseViewModel
+    public class DetailMovieSearchViewModel : BaseViewModel
     {
 
         private Movie movie;
-        public Movie Movie {
+        public Movie Movie
+        {
             get
             {
                 return movie;
@@ -21,25 +22,30 @@ namespace Hello.ViewModels
             }
         }
         
-        public DetailMovieViewModel(Movie movie, bool downloadFull = true)
+        public DetailMovieSearchViewModel(Movie movie, bool downloadFull = true)
         {
             Movie = movie;
-            if (downloadFull) {
+            Title = movie.Title;
+            if (downloadFull)
+            {
                 getDetail();
             }
 
         }
 
-        public async void getDetail() {
+        public async void getDetail()
+        {
             var m = await new IMDBDataProvider().GetMovieByIdAsync(Movie.imdbID);
             Movie = m;
         }
 
-        public async void AddToWantToWatch() {
-            
+        public async void AddToWantToWatch()
+        {
+            await WantToWatchMoviesLocalDataStore.Current.AddItemAsync(movie);
         }
 
-        public async void AddToAlreadyWatch() {
+        public async void AddToAlreadyWatch()
+        {
             await AlreadyWatchedMoviesLocalDataStore.Current.AddItemAsync(movie);
         }
     }

@@ -20,10 +20,17 @@ namespace Hello.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class WantToWatchTab : ContentPage
     {
+        WantToWatchViewModel viewModel = new WantToWatchViewModel();
         public WantToWatchTab()
         {
             InitializeComponent();
-            BindingContext = new AlreadyWatchedViewModel();
+            BindingContext = viewModel;
+            startInitViewModelAsync();
+        }
+
+        async void startInitViewModelAsync()
+        {
+            await viewModel.InitAsync();
         }
 
         async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)

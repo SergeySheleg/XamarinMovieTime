@@ -16,6 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\DetailMovieSearchPage.xaml.cs">
+      <DependentUpon>DetailMovieSearchPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\SearchTab.xaml.cs">
       <DependentUpon>SearchTab.xaml</DependentUpon>
     </Compile>
@@ -31,7 +34,7 @@
     <EmbeddedResource Update="Views\AlreadyWatchedTab.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\DetailMoviePage.xaml">
+    <EmbeddedResource Update="Views\DetailMovieSearchPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

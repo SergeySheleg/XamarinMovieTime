@@ -36,7 +36,7 @@ namespace Hello.Views
             if (item == null)
                 return;
 
-            await Navigation.PushAsync(new DetailMoviePage(new DetailMovieViewModel(item)));
+            await Navigation.PushAsync(new DetailMovieSearchPage(new DetailMovieSearchViewModel(item)));
 
             // Manually deselect item.
             MoviesListView.SelectedItem = null;

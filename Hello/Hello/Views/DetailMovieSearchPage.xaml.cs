@@ -11,15 +11,15 @@ using Xamarin.Forms.Xaml;
 namespace Hello.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class DetailMoviePage : ContentPage
+	public partial class DetailMovieSearchPage : ContentPage
 	{
-        DetailMovieViewModel viewModel;
-        public DetailMoviePage ()
+        DetailMovieSearchViewModel viewModel;
+        public DetailMovieSearchPage()
 		{
 			InitializeComponent ();
 		}
 
-        public DetailMoviePage (DetailMovieViewModel viewModel)
+        public DetailMovieSearchPage(DetailMovieSearchViewModel viewModel)
         {
             InitializeComponent();
             BindingContext = this.viewModel = viewModel;
@@ -27,7 +27,7 @@ namespace Hello.Views
 
         public void AddToWantToWatch()
         {
-            
+            viewModel.AddToWantToWatch();
         }
 
         public void AddToAlreadyWatch()

@@ -15,7 +15,7 @@ namespace Hello.Services
         public MoviesLocalDataStore(string dataBaseName)
         {
             database = new SQLiteAsyncConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), dataBaseName));
-            database.CreateTableAsync<Movie>()/*.Wait()*/;
+            database.CreateTableAsync<Movie>().Wait();
         }
 
         public Task<int> AddItemAsync(Movie item)

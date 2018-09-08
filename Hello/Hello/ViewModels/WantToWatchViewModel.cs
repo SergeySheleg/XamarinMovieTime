@@ -11,20 +11,20 @@ using Xamarin.Forms;
 
 namespace Hello.ViewModels
 {
-    class AlreadyWatchedViewModel : BaseViewModel
+    class WantToWatchViewModel : BaseViewModel
     {
-        private AlreadyWatchedMoviesLocalDataStore LocalDataStorege = AlreadyWatchedMoviesLocalDataStore.Current;
+        private WantToWatchMoviesLocalDataStore LocalDataStorege = WantToWatchMoviesLocalDataStore.Current;
 
         public ObservableCollection<Movie> Items { get; set; } = new ObservableCollection<Movie>();
 
-        public AlreadyWatchedViewModel() {
-            MessagingCenter.Subscribe<AlreadyWatchedMoviesLocalDataStore, Movie>(this, "AddItem", (obj, item) =>
+        public WantToWatchViewModel() {
+            MessagingCenter.Subscribe<WantToWatchMoviesLocalDataStore, Movie>(this, "AddItem", (obj, item) =>
             {
                 var newItem = item as Movie;
                 Items.Add(newItem);
             });
         }
-
+   
         public async Task InitAsync()
         {
             var storedMovies = await LocalDataStorege.GetItemsAsync();

@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="{Binding Title}"
              x:Class="Hello.Views.SearchTab">
 
     <StackLayout>
@@ -15,7 +16,9 @@
                        HorizontalOptions="FillAndExpand"
                        SearchButtonPressed="SearchButton_onClicked"
                        ></SearchBar>
-            
+
+            <ActivityIndicator IsVisible="{Binding IsBusy}"></ActivityIndicator>
+
         </StackLayout>
 
 
@@ -23,7 +26,8 @@
                 ItemsSource="{Binding Items}"
                 CachingStrategy="RecycleElement"
                 RowHeight="100"
-                ItemSelected="OnItemSelected">
+                ItemSelected="OnItemSelected"
+                >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -37,5 +41,8 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        
+        
     </StackLayout>
 </ContentPage>
