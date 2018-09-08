@@ -6,17 +6,23 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Xamarin.Forms;
 
 namespace Hello.ViewModels
 {
     class AlreadyWatchedViewModel : INotifyPropertyChanged
     {
-        private IDataStore<Movie> LocalDataStorege = AlreadyWatchedMoviesLocalDataStore.getInstance();
+        private AlreadyWatchedMoviesLocalDataStore LocalDataStorege = AlreadyWatchedMoviesLocalDataStore.Current;
 
         public ObservableCollection<Movie> Items { get; set; } = new ObservableCollection<Movie>();
 
         public AlreadyWatchedViewModel() {
             LoadFromLocalDataStorege();
+            MessagingCenter.Subscribe<AlreadyWatchedMoviesLocalDataStore, Movie>(this, "AddItem", (obj, item) =>
+            {
+                var newItem = item as Movie;
+                Items.Add(newItem);
+            });
         }
    
         private async void LoadFromLocalDataStorege()

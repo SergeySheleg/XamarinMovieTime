@@ -1,23 +1,30 @@
-﻿using System;
+﻿using Hello.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Hello.Services
 {
-    class AlreadyWatchedMoviesLocalDataStore
+    class AlreadyWatchedMoviesLocalDataStore : MoviesLocalDataStore
     {
-        private static MoviesLocalDataStore instance;
-        private static object syncRoot = new Object();
-        public static MoviesLocalDataStore getInstance()
+        public static readonly AlreadyWatchedMoviesLocalDataStore Current = new AlreadyWatchedMoviesLocalDataStore();
+        
+        private AlreadyWatchedMoviesLocalDataStore() : base("AlreadyWatchedMovies.db3")
         {
-            if (instance == null) {
-                lock (syncRoot)
-                {
-                    if (instance == null)
-                        instance = new MoviesLocalDataStore("AlreadyWatchedMovies.db3");
-                }
-            }
-            return instance;
         }
-    }
+
+        public new Task<int> AddItemAsync(Movie item)
+        {
+            var r = database.InsertAsync(item);
+            r.ContinueWith((i) =>
+            {
+                MessagingCenter.Send(this, "AddItem", item);
+            });
+
+            return r;
+
+            }
+        }
 }

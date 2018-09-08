@@ -7,9 +7,15 @@
         <!--<Entry x:Name="MovieName" Text="{Binding MovieName, Mode=TwoWay}" TextChanged="EntryMovieName_onTextChanged"/>-->
 
         <StackLayout Orientation="Horizontal">
-            <Entry x:Name="MovieNameEntry" HorizontalOptions="FillAndExpand"/>
             <!--<Entry x:Name="MovieName" TextChanged="EntryMovieName_onTextChanged"/>-->
-            <Button x:Name="SearchButton" Clicked="SearchButton_onClicked"></Button>
+            
+            <!--<Entry x:Name="MovieNameEntry" HorizontalOptions="FillAndExpand"/>-->
+            <!--<Button x:Name="SearchButton" Clicked="SearchButton_onClicked"></Button>-->
+            <SearchBar x:Name="MovieName"
+                       HorizontalOptions="FillAndExpand"
+                       SearchButtonPressed="SearchButton_onClicked"
+                       ></SearchBar>
+            
         </StackLayout>
 
 

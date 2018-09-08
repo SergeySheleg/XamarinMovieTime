@@ -34,5 +34,13 @@ namespace Hello.ViewModels
             var m = await new IMDBDataProvider().GetMovieByIdAsync(Movie.imdbID);
             Movie = m;
         }
+
+        public async void AddToWantToWatch() {
+            
+        }
+
+        public async void AddToAlreadyWatch() {
+            await AlreadyWatchedMoviesLocalDataStore.Current.AddItemAsync(movie);
+        }
     }
 }

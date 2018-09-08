@@ -24,5 +24,15 @@ namespace Hello.Views
             InitializeComponent();
             BindingContext = this.viewModel = viewModel;
         }
+
+        public void AddToWantToWatch()
+        {
+            
+        }
+
+        public void AddToAlreadyWatch()
+        {
+            viewModel.AddToAlreadyWatch();
+        }
     }
 }

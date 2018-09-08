@@ -25,7 +25,8 @@ namespace Hello.Views
         //}
 
         public void SearchButton_onClicked() {
-            context.MovieName = MovieNameEntry.Text;
+            //context.MovieName = MovieNameEntry.Text;
+            context.MovieName = MovieName.Text;
             context.UpdateList();
         }
 

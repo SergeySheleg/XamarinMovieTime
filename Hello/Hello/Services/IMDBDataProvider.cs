@@ -17,7 +17,7 @@ namespace Hello.Services
         public string ImdbApiKey { get; set; } = "ce6832f4";
 
         public async Task<Movie> GetMovieByIdAsync(string id = "tt3896198") {
-            string url = ImdbUrl + "?i=" + id + "&apikey=" + ImdbApiKey;
+            string url = ImdbUrl + "?i=" + id + "&plot=full"+ "&apikey=" + ImdbApiKey;
 
             Movie movie;
 

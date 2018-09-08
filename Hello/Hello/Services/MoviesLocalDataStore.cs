@@ -5,12 +5,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Hello.Services
 {
     class MoviesLocalDataStore : IDataStore<Movie>
     {
-        SQLiteAsyncConnection database;
+        protected SQLiteAsyncConnection database;
         public MoviesLocalDataStore(string dataBaseName)
         {
             database = new SQLiteAsyncConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), dataBaseName));
