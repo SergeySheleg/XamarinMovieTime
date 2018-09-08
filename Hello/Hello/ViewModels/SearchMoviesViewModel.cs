@@ -9,24 +9,23 @@ using System.Runtime.CompilerServices;
 
 namespace Hello.ViewModels
 {
-    class AlreadyWatchedViewModel : INotifyPropertyChanged
+    class SearchMoviesViewModel : INotifyPropertyChanged
     {
-        private IDataStore<Movie> LocalDataStorege = AlreadyWatchedMoviesLocalDataStore.getInstance();
-
         public ObservableCollection<Movie> Items { get; set; } = new ObservableCollection<Movie>();
 
-        public AlreadyWatchedViewModel() {
-            LoadFromLocalDataStorege();
-        }
-   
-        private async void LoadFromLocalDataStorege()
+        public SearchMoviesViewModel()
         {
-            var storedMovies = await LocalDataStorege.GetItemsAsync();
+        }
 
-            foreach (var m in storedMovies)
-            {
+        public string MovieName { get; set; }
+
+        public async void UpdateList() {
+            var imdb = new IMDBDataProvider();
+            var movies = await imdb.SearchMoviesByNameAsync(MovieName);
+            
+            Items.Clear();
+            foreach (var m in movies) {
                 Items.Add(m);
-                System.Diagnostics.Debug.Write("ITEMS: " + m.Title);
             }
         }
 

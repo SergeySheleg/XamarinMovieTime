@@ -6,7 +6,17 @@
     <TabbedPage.Children>
         <NavigationPage Title="Already watched">
             <x:Arguments>
-                <views:StoredMoviesListPage/>
+                <views:AlreadyWatchedTab/>
+            </x:Arguments>
+        </NavigationPage>
+        <NavigationPage Title="Want to watch">
+            <x:Arguments>
+                <views:WantToWatchTab/>
+            </x:Arguments>
+        </NavigationPage>
+        <NavigationPage Title="Search">
+            <x:Arguments>
+                <views:SearchTab/>
             </x:Arguments>
         </NavigationPage>
     </TabbedPage.Children>

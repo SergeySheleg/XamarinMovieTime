@@ -16,13 +16,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\StoredMoviesListPage.xaml.cs">
-      <DependentUpon>StoredMoviesListPage.xaml</DependentUpon>
+    <Compile Update="Views\SearchTab.xaml.cs">
+      <DependentUpon>SearchTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\WantToWatchTab.xaml.cs">
+      <DependentUpon>WantToWatchTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\AlreadyWatchedTab.xaml.cs">
+      <DependentUpon>AlreadyWatchedTab.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\StoredMoviesListPage.xaml">
+    <EmbeddedResource Update="Views\AlreadyWatchedTab.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

@@ -18,9 +18,9 @@ using System.Net.Http;
 namespace Hello.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class StoredMoviesListPage : ContentPage
+    public partial class WantToWatchTab : ContentPage
     {
-        public StoredMoviesListPage()
+        public WantToWatchTab()
         {
             InitializeComponent();
             BindingContext = new AlreadyWatchedViewModel();
