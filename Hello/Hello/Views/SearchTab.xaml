@@ -7,16 +7,17 @@
         <!--<Entry x:Name="MovieName" Text="{Binding MovieName, Mode=TwoWay}" TextChanged="EntryMovieName_onTextChanged"/>-->
 
         <StackLayout Orientation="Horizontal">
-            <Entry x:Name="MovieNameEntry"/>
+            <Entry x:Name="MovieNameEntry" HorizontalOptions="FillAndExpand"/>
             <!--<Entry x:Name="MovieName" TextChanged="EntryMovieName_onTextChanged"/>-->
             <Button x:Name="SearchButton" Clicked="SearchButton_onClicked"></Button>
         </StackLayout>
 
-        
+
         <ListView x:Name="MoviesListView"
                 ItemsSource="{Binding Items}"
                 CachingStrategy="RecycleElement"
-                RowHeight="100">
+                RowHeight="100"
+                ItemSelected="OnItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

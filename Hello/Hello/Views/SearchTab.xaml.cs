@@ -2,6 +2,7 @@
 using Xamarin.Forms.Xaml;
 
 using Hello.ViewModels;
+using Hello.Models;
 
 namespace Hello.Views
 {
@@ -26,6 +27,18 @@ namespace Hello.Views
         public void SearchButton_onClicked() {
             context.MovieName = MovieNameEntry.Text;
             context.UpdateList();
+        }
+
+        async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
+        {
+            var item = args.SelectedItem as Movie;
+            if (item == null)
+                return;
+
+            await Navigation.PushAsync(new DetailMoviePage(new DetailMovieViewModel(item)));
+
+            // Manually deselect item.
+            MoviesListView.SelectedItem = null;
         }
 
     }

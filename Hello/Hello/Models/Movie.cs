@@ -2,7 +2,7 @@
 
 namespace Hello.Models
 {
-    class Movie {
+    public class Movie {
         [PrimaryKey]
         public string imdbID { get; set; } = "";
         public string Title { get; set; } = "";
