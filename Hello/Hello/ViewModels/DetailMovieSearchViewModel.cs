@@ -2,6 +2,7 @@
 using Hello.Services;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace Hello.ViewModels
@@ -21,16 +22,41 @@ namespace Hello.ViewModels
                 SetProperty(ref movie, value);
             }
         }
-        
+
+        bool isWantToWatch = false;
+        public bool IsWantToWatch
+        {
+            get { return isWantToWatch; }
+            set { SetProperty(ref isWantToWatch, value); }
+        }
+
+        bool isAlreadyWatched = false;
+        public bool IsAlreadyWatched
+        {
+            get { return isAlreadyWatched; }
+            set { SetProperty(ref isAlreadyWatched, value); }
+        }
+
+
         public DetailMovieSearchViewModel(Movie movie, bool downloadFull = true)
         {
             Movie = movie;
+            checkContains();
+
             Title = movie.Title;
             if (downloadFull)
             {
                 getDetail();
             }
 
+        }
+
+        public async void checkContains() {
+            IsWantToWatch = await WantToWatchMoviesLocalDataStore.Current.CheckContainsAsync(movie);
+            IsAlreadyWatched = await AlreadyWatchedMoviesLocalDataStore.Current.CheckContainsAsync(movie);
+
+            Debug.Write(movie.Title + " IsWantToWatch = " + IsWantToWatch + " IsAlreadyWatched = " + IsAlreadyWatched);
+            
         }
 
         public async void getDetail()

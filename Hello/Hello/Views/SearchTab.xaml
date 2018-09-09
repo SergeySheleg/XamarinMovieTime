@@ -16,11 +16,9 @@
                        HorizontalOptions="FillAndExpand"
                        SearchButtonPressed="SearchButton_onClicked"
                        ></SearchBar>
-
-            <ActivityIndicator IsVisible="{Binding IsBusy}"></ActivityIndicator>
-
         </StackLayout>
 
+        <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"></ActivityIndicator>
 
         <ListView x:Name="MoviesListView"
                 ItemsSource="{Binding Items}"

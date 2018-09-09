@@ -23,6 +23,12 @@ namespace Hello.ViewModels
                 var newItem = item as Movie;
                 Items.Add(newItem);
             });
+
+            MessagingCenter.Subscribe<AlreadyWatchedMoviesLocalDataStore, Movie>(this, "DeleteItem", (obj, item) =>
+            {
+                var m = item as Movie;
+                Items.Remove(m);
+            });
         }
 
         public async Task InitAsync()

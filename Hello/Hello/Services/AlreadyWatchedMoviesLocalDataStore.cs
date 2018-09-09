@@ -22,5 +22,16 @@ namespace Hello.Services
 
             return r;
         }
+        
+        public  new Task<int> DeleteItemAsync(Movie item)
+        {
+            var r = database.DeleteAsync(item);
+            r.ContinueWith((i) =>
+            {
+                MessagingCenter.Send(this, "DeleteItem", item);
+            });
+
+            return r;
+        }
     }
 }

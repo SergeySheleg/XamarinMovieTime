@@ -20,11 +20,15 @@ namespace Hello.ViewModels
 
         public string MovieName { get; set; }
 
+
+
+
         public async void UpdateList() {
             if (IsBusy) {
                 return;
             }
             IsBusy = true;
+            Title = "Search...";
             try
             {
                 var imdb = new IMDBDataProvider();
@@ -51,17 +55,5 @@ namespace Hello.ViewModels
                 IsBusy = false;
             }
         }
-
-        #region INotifyPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            var changed = PropertyChanged;
-            if (changed == null)
-                return;
-
-            changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
     }
 }

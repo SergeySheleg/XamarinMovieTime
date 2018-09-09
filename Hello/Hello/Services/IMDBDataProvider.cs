@@ -51,7 +51,9 @@ namespace Hello.Services
             {
                 return new List<Movie>();
             }
-            string url = ImdbUrl + "?s=" + name + "&apikey=" + ImdbApiKey;
+
+            //string url = ImdbUrl + "?s=" + name + "&apikey=" + ImdbApiKey;
+            string url = ImdbUrl + "?apikey=" + ImdbApiKey + "&s=" + Uri.EscapeUriString(name);
 
             using (HttpClient client = new HttpClient())
             {

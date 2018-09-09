@@ -4,7 +4,7 @@
              x:Class="Hello.Views.AlreadyWatchedTab">
     <ListView x:Name="MoviesListView"
             ItemsSource="{Binding Items}"
-            ItemTapped="Handle_ItemTapped"
+            ItemSelected="OnItemSelected"
             CachingStrategy="RecycleElement"
             RowHeight="100">
         <ListView.ItemTemplate>

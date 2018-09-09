@@ -2,6 +2,7 @@
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,7 +33,12 @@ namespace Hello.Services
         {
             return database.DeleteAsync(GetItemAsync(id));
         }
-        
+
+        public Task<int> DeleteItemAsync(Movie item)
+        {
+            return database.DeleteAsync(item);
+        }
+
         public Task<List<Movie>> GetItemsAsync(bool forceRefresh = false)
         {
             if (forceRefresh)
@@ -49,6 +55,24 @@ namespace Hello.Services
         public Task<int> EraseAllAsync()
         {
             return database.DropTableAsync<Movie>();
+        }
+
+        public async Task<bool> CheckContainsAsync(Movie item)
+        {
+            bool res = false;
+
+            try
+            {
+                Movie m = await database.FindAsync<Movie>(item.imdbID);
+                res = m != null;
+            }
+            catch (Exception e)
+            {
+                Debug.Write(e);
+                res = false;
+            }
+
+            return res;
         }
     }
 }
