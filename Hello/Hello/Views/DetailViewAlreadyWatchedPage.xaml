@@ -14,6 +14,10 @@
                     <Button Text="remove"
                             Clicked="Remove"    
                     />
+
+                    <Button Text="open imdb"
+                            Clicked="OpenURL"
+                            />
                 </StackLayout>
 
                 <StackLayout Orientation="Vertical">

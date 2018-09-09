@@ -53,5 +53,10 @@ namespace Hello.Views
             }
 
         }
+
+        public void OpenURL()
+        {
+            Device.OpenUri(new Uri("https://www.imdb.com/title/" + viewModel.Movie.imdbID));
+        }
     }
 }

@@ -17,6 +17,8 @@
                             Clicked="AddToAlreadyWatch" 
                             IsVisible="{Binding IsNotInLocalStorage}"
                     />
+                    <Button Text="Open IMDB"
+                            Clicked="OpenURL"/>
                 </StackLayout>
 
                 <StackLayout Orientation="Vertical">
