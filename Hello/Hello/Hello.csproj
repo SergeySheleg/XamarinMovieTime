@@ -19,6 +19,9 @@
     <Compile Update="Views\DetailMovieSearchPage.xaml.cs">
       <DependentUpon>DetailMovieSearchPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\DetailViewWantToWatchPage.xaml.cs">
+      <DependentUpon>DetailViewWantToWatchPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\SearchTab.xaml.cs">
       <DependentUpon>SearchTab.xaml</DependentUpon>
     </Compile>

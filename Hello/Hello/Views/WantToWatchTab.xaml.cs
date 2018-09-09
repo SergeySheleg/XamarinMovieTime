@@ -14,6 +14,7 @@ using Newtonsoft.Json.Linq;
 
 
 using System.Net.Http;
+using Hello.Models;
 
 namespace Hello.Views
 {
@@ -33,16 +34,16 @@ namespace Hello.Views
             await viewModel.InitAsync();
         }
 
-        async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
+        async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            if (e.Item == null)
+            var item = args.SelectedItem as Movie;
+            if (item == null)
                 return;
 
-            await DisplayAlert("Item Tapped", "An item was tapped.", "OK");
-
-            //Deselect Item
-            ((ListView)sender).SelectedItem = null;
+            await Navigation.PushAsync(new DetailViewWantToWatchPage(new DetailMovieLocalViewModel(item)));
+            
+            MoviesListView.SelectedItem = null;
         }
-    
+
     }
 }

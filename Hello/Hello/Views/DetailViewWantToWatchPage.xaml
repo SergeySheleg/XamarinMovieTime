@@ -1,21 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:models="clr-namespace:Hello.Models"
              Title="{Binding Title}"
-             x:Class="Hello.Views.DetailMovieSearchPage">
+             x:Class="Hello.Views.DetailViewWantToWatchPage">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Orientation="Vertical">
-                
+
                 <StackLayout Orientation="Horizontal">
-                    <Button Text="Want to watch"
-                        Clicked="AddToWantToWatch"   
-                        IsVisible="{Binding IsNotInLocalStorage}"
+                    <Button Text="move to Already Watch"
+                        Clicked="MoveToAlreadyWatch"    
                     />
-                    <Button Text="Already Watch"
-                            Clicked="AddToAlreadyWatch" 
-                            IsVisible="{Binding IsNotInLocalStorage}"
+                    <Button Text="remove"
+                            Clicked="Remove"    
                     />
                 </StackLayout>
 
@@ -29,7 +26,7 @@
                     <Label Text="{Binding Movie.imdbRating}"/>
                     <Label Text="{Binding Movie.Plot}"/>
                 </StackLayout>
-                
+
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

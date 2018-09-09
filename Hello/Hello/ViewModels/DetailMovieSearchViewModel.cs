@@ -37,6 +37,12 @@ namespace Hello.ViewModels
             set { SetProperty(ref isAlreadyWatched, value); }
         }
 
+        bool isNotInLocalStorage = true;
+        public bool IsNotInLocalStorage
+        {
+            get { return isNotInLocalStorage; }
+            set { SetProperty(ref isNotInLocalStorage, value); }
+        }
 
         public DetailMovieSearchViewModel(Movie movie, bool downloadFull = true)
         {
@@ -54,6 +60,7 @@ namespace Hello.ViewModels
         public async void checkContains() {
             IsWantToWatch = await WantToWatchMoviesLocalDataStore.Current.CheckContainsAsync(movie);
             IsAlreadyWatched = await AlreadyWatchedMoviesLocalDataStore.Current.CheckContainsAsync(movie);
+            IsNotInLocalStorage = !IsWantToWatch && !IsAlreadyWatched;
 
             Debug.Write(movie.Title + " IsWantToWatch = " + IsWantToWatch + " IsAlreadyWatched = " + IsAlreadyWatched);
             
@@ -67,12 +74,24 @@ namespace Hello.ViewModels
 
         public async void AddToWantToWatch()
         {
-            await WantToWatchMoviesLocalDataStore.Current.AddItemAsync(movie);
+            try
+            {
+                await WantToWatchMoviesLocalDataStore.Current.AddItemAsync(movie);
+            }
+            catch (Exception e) {
+                Debug.Write(e);
+            }
         }
 
         public async void AddToAlreadyWatch()
         {
-            await AlreadyWatchedMoviesLocalDataStore.Current.AddItemAsync(movie);
+            try
+            {
+                await AlreadyWatchedMoviesLocalDataStore.Current.AddItemAsync(movie);
+            }
+            catch (Exception e) {
+                Debug.Write(e);
+            }
         }
     }
 }

@@ -34,16 +34,6 @@ namespace Hello.Views
             await viewModel.InitAsync();
         }
 
-        //async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
-        //{
-        //    if (e.Item == null)
-        //        return;
-
-        //    await DisplayAlert("Item Tapped", "An item was tapped.", "OK");
-
-        //    //Deselect Item
-        //    ((ListView)sender).SelectedItem = null;
-        //}
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {

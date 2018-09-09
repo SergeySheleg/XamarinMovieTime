@@ -11,24 +11,25 @@ using Xamarin.Forms.Xaml;
 
 namespace Hello.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class DetailMovieSearchPage : ContentPage
-	{
-        DetailMovieSearchViewModel viewModel;
-        public DetailMovieSearchPage()
-		{
-			InitializeComponent ();
-		}
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class DetailViewWantToWatchPage : ContentPage
+    {
 
-        public DetailMovieSearchPage(DetailMovieSearchViewModel viewModel)
+        DetailMovieLocalViewModel viewModel;
+        public DetailViewWantToWatchPage()
+        {
+            InitializeComponent();
+        }
+        public DetailViewWantToWatchPage(DetailMovieLocalViewModel viewModel)
         {
             InitializeComponent();
             BindingContext = this.viewModel = viewModel;
         }
 
-        public async void AddToWantToWatch()
+
+        public async void MoveToAlreadyWatch()
         {
-            viewModel.AddToWantToWatch();
+            viewModel.MoveToAlreadyWatch();
             try
             {
                 await Navigation.PopAsync();
@@ -39,9 +40,9 @@ namespace Hello.Views
             }
         }
 
-        public async void AddToAlreadyWatch()
+        public async void Remove()
         {
-            viewModel.AddToAlreadyWatch();
+            viewModel.RemoveFromWantToWatch();
             try
             {
                 await Navigation.PopAsync();
@@ -50,6 +51,7 @@ namespace Hello.Views
             {
                 Debug.Write(e);
             }
+
         }
     }
 }
