@@ -12,10 +12,12 @@ namespace Hello.ViewModels
 {
     class SearchMoviesViewModel : BaseViewModel
     {
-        public ObservableCollection<Movie> Items { get; set; } = new ObservableCollection<Movie>();
+        public ObservableCollection<Movie> Items { get; set; }
+        private OMDBDataProvider omdb = new OMDBDataProvider();
 
         public SearchMoviesViewModel()
         {
+            Items = omdb.Items;
         }
 
         public string MovieName { get; set; }
@@ -31,19 +33,8 @@ namespace Hello.ViewModels
             Title = "Search...";
             try
             {
-                var imdb = new OMDBDataProvider();
-                var movies = await imdb.SearchMoviesByNameAsync(MovieName);
-
-                uint size = 0;
-
-                Items.Clear();
-                foreach (var m in movies)
-                {
-                    Items.Add(m);
-                    size++;
-                }
-
-                Title = size + " Results";
+                await omdb.SearchMoviesByNameAsync(MovieName);
+                Title = Items.Count + " Results";
 
             }
             catch (Exception e)

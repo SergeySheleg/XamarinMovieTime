@@ -46,20 +46,16 @@ namespace Hello.Services
             return movie;
 
         }
-        public async Task<IEnumerable<Movie>> SearchMoviesByNameAsync(string name)
+        public async Task SearchMoviesByNameAsync(string name)
         {
-            var list = new List<Movie>();
-            
+            Items.Clear();
 
             if (String.IsNullOrEmpty(name))
             {
-                return list;
+                return;
             }
 
             uint page = 1;
-
-            //string url = ImdbUrl + "?s=" + name + "&apikey=" + ImdbApiKey;
-            
 
             using (HttpClient client = new HttpClient())
             {
@@ -79,12 +75,14 @@ namespace Hello.Services
                             break;
                         }
 
-                        //int totalResults = o.Value<int>("totalResults");
-
                         var searchToken = o.SelectToken(@"$.Search");
-                        //return JsonConvert.DeserializeObject<IEnumerable<Movie>>(searchToken.ToString());
 
-                        list.AddRange(JsonConvert.DeserializeObject<List<Movie>>(searchToken.ToString()));
+                        var list = (JsonConvert.DeserializeObject<List<Movie>>(searchToken.ToString()));
+
+                        foreach (var m in list)
+                        {
+                            Items.Add(m);
+                        }
                         page++;
                     }
                     
@@ -95,7 +93,7 @@ namespace Hello.Services
                 }
             }
 
-            return list;
+            return;
         }
 
         public ObservableCollection<Movie> Items { get; set; } = new ObservableCollection<Movie>();
