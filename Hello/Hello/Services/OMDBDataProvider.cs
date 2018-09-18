@@ -4,6 +4,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,13 +12,13 @@ using System.Threading.Tasks;
 namespace Hello.Services
 {
 
-    class IMDBDataProvider
+    class OMDBDataProvider
     {
-        static private string ImdbUrl = "http://www.omdbapi.com/";
-        public string ImdbApiKey { get; set; } = "ce6832f4";
+        static private string OmdbUrl = "http://www.omdbapi.com/";
+        public string OmdbApiKey { get; set; } = "ce6832f4";
 
         public async Task<Movie> GetMovieByIdAsync(string id = "tt3896198") {
-            string url = ImdbUrl + "?i=" + id + "&plot=full"+ "&apikey=" + ImdbApiKey;
+            string url = OmdbUrl + "?i=" + id + "&plot=full"+ "&apikey=" + OmdbApiKey;
 
             Movie movie;
 
@@ -47,35 +48,54 @@ namespace Hello.Services
         }
         public async Task<IEnumerable<Movie>> SearchMoviesByNameAsync(string name)
         {
-            if (name == "")
+            var list = new List<Movie>();
+            
+
+            if (String.IsNullOrEmpty(name))
             {
-                return new List<Movie>();
+                return list;
             }
 
+            uint page = 1;
+
             //string url = ImdbUrl + "?s=" + name + "&apikey=" + ImdbApiKey;
-            string url = ImdbUrl + "?apikey=" + ImdbApiKey + "&s=" + Uri.EscapeUriString(name);
+            
 
             using (HttpClient client = new HttpClient())
             {
                 try
                 {
-                    client.BaseAddress = new Uri(url);
-                    var response = await client.GetAsync(client.BaseAddress);
-                    response.EnsureSuccessStatusCode();
+                    while (true) {
+                        string url = OmdbUrl + "?apikey=" + OmdbApiKey + "&s=" + Uri.EscapeUriString(name) + "&page=" + page + "&type=movie";
 
-                    var content = await response.Content.ReadAsStringAsync();
-                    JObject o = JObject.Parse(content);
+                        client.BaseAddress = new Uri(url);
+                        var response = await client.GetAsync(client.BaseAddress);
+                        response.EnsureSuccessStatusCode();
 
-                    var searchToken = o.SelectToken(@"$.Search");
-                    return JsonConvert.DeserializeObject<IEnumerable<Movie>>(searchToken.ToString());
+                        var content = await response.Content.ReadAsStringAsync();
+                        JObject o = JObject.Parse(content);
+                        bool omdb_response = o.Value<bool>("Response");
+                        if (!omdb_response) {
+                            break;
+                        }
+
+                        //int totalResults = o.Value<int>("totalResults");
+
+                        var searchToken = o.SelectToken(@"$.Search");
+                        //return JsonConvert.DeserializeObject<IEnumerable<Movie>>(searchToken.ToString());
+
+                        list.AddRange(JsonConvert.DeserializeObject<List<Movie>>(searchToken.ToString()));
+                        page++;
+                    }
+                    
                 }
                 catch (Exception e)
                 {
-                    System.Diagnostics.Debug.Write(e.ToString(), "IMDBDataProvider Error");
+                    Debug.Write(e.ToString(), "OMDBDataProvider Error");
                 }
             }
 
-            return new List<Movie>();
+            return list;
         }
 
         public ObservableCollection<Movie> Items { get; set; } = new ObservableCollection<Movie>();

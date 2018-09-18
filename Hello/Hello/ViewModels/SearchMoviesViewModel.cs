@@ -31,7 +31,7 @@ namespace Hello.ViewModels
             Title = "Search...";
             try
             {
-                var imdb = new IMDBDataProvider();
+                var imdb = new OMDBDataProvider();
                 var movies = await imdb.SearchMoviesByNameAsync(MovieName);
 
                 uint size = 0;

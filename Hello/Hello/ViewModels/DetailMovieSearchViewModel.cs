@@ -68,7 +68,7 @@ namespace Hello.ViewModels
 
         public async void getDetail()
         {
-            var m = await new IMDBDataProvider().GetMovieByIdAsync(Movie.imdbID);
+            var m = await new OMDBDataProvider().GetMovieByIdAsync(Movie.imdbID);
             Movie = m;
         }
 
